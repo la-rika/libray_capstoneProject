@@ -1,0 +1,13 @@
+body {
+    background-image: url("./images/background.png");
+    font-family: "Inria Serif", serif;
+    margin: 0;
+    height: 100vh;
+}
+
+.title-container {
+    color: white;
+    width: 50%;
+    font-size: 134px;
+}
+
