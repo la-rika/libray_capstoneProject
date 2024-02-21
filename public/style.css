@@ -1,13 +1,39 @@
 body {
-    background-image: url("./images/background.png");
-    font-family: "Inria Serif", serif;
+    font-family: "Inria Serif", serif !important;
     margin: 0;
+}
+
+.title {
+    color: white;
+}
+
+.home-container {
+    background-image: url("./images/background.png");
     height: 100vh;
 }
 
 .title-container {
-    color: white;
     width: 50%;
     font-size: 134px;
+    padding-top: 141px;
+    padding-left: 143px;
 }
 
+.list-container {
+    margin-top: 5%;
+}
+
+.bookmark-container {
+    width: 38%;
+    height: 0;
+    box-sizing: border-box;
+    border: 1px solid #034C8C;
+    border-right: 25px solid transparent;
+    border-left: none;
+    border-top: 50px solid #034C8C;
+    border-bottom: 50px solid #034C8C;
+    display: flex;
+    align-items: center;
+    font-size: 40px;
+    padding-left: 41px;
+}

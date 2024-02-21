@@ -5,7 +5,6 @@ import ejs from 'ejs';
 import pg from 'pg';
 import _ from 'lodash';
 
-
 const app = express();
 const port = 3000;
 
