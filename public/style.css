@@ -24,7 +24,7 @@ body {
 }
 
 .list-container {
-    padding-top: 2%;
+    padding-top: 3%;
 }
 
 .bookmark-container {
@@ -77,7 +77,7 @@ body {
     border-radius: 8px;
     width: 12px;
     height: 12px;
-    background-color: purple;
+    background-color: #034C8C;
 }
 
 .rating-circle-empty{
@@ -85,15 +85,77 @@ body {
     border-radius: 8px;
     width: 12px;
     height: 12px;
-    border: 1.5px solid purple;
+    border: 1.5px solid #034C8C;
 }
 
 .pagination-container{
     margin-top: 26px;
 }
 
-.add-form{
-    width: 40%;
+.form-container{
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    margin-top: 57px;
+}
+
+.add-form{
+    width: 678px;
+    height: 418px;
+    border: 2px solid #E1E1E1;
+    padding: 33px;
+    border-radius: 15px;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.add-form div:nth-child(1){
+    width: 91%;
+}
+
+.not-text-area{
+    border: none;
+    border-bottom: 1px solid #034C8C;
+    display: block;
+    margin-bottom: 8px;
+    width: 94%;
+}
+
+.add-form select{
+    width: 94%;
+    border: 1px solid #034C8C;
+    border-radius: 4px;
+    padding: 2px 5px;
+    margin-top: 32px;
+    display: block;
+}
+
+.add-form textarea{
+    width: 100%;
+    resize: none;
+    height: 71%;
+    border-radius: 14px;
+    border-color: #034C8C;
+}
+
+.label-img{
+    border: 1px solid #034C8C;
+    width: 102px;
+    height: 98px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 69px;
+    margin-top: 28px;
+    color: #034C8C;
+    margin-left: 57px;
+    border-radius: 17px;
+}
+
+.img-input{
+    width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
 }

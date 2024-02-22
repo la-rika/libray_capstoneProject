@@ -18,7 +18,7 @@
             <div>
                 <div class="grid-container">
                     <% for(var x=0; x<=5;x++){ %>
-                        <div class="card" >
+                        <div class="card">
                             <div class="row g-0">
                                 <div class="col-md-4">
                                     <img src="..." class="img-fluid rounded-start" alt="...">
@@ -27,7 +27,8 @@
                                     <div class="card-body">
                                         <h5 class="card-title">Card title</h5>
                                         <div class="rating-circle-full"></div>
-                                        <p class="card-text">This is a wider card with supporting text below as a natural
+                                        <p class="card-text">This is a wider card with supporting text below as a
+                                            natural
                                             lead-in to
                                             additional content. This content is a little bit longer.</p>
                                     </div>
@@ -57,15 +58,24 @@
             </div>
         </div>
     </section>
-    <section class="add-container">
+    <section class="add-container" style="height: 649px;">
         <div class="bookmark-container">
             <div class="title">ADD BOOK</div>
         </div>
         <div class="form-container">
             <div class="add-form">
-                <input type="text" name="" id="">
-                <input type="text" name="" id="">
-                <input type="file" src="" alt="">
+                <div>
+                    <input class="not-text-area" type="text" name="" id="">
+                    <input class="not-text-area" type="text" name="" id="">
+                    <select name="" id="">
+                        <option value="">ciao</option>
+                    </select>
+                    <label for="book-cover" class="label-img">+</label>
+                    <input class="img-input" type="file" src="" alt="" name="bookCover" id="book-cover">
+                </div>
+                <div>
+                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                </div>
             </div>
         </div>
     </section>
