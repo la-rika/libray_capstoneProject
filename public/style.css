@@ -1,3 +1,7 @@
+html{
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: "Inria Serif", serif !important;
     margin: 0;
@@ -20,7 +24,7 @@ body {
 }
 
 .list-container {
-    margin-top: 5%;
+    padding-top: 2%;
 }
 
 .bookmark-container {
@@ -39,11 +43,17 @@ body {
 }
 
 .cards-container{
-    margin-top: 53px !important;
-    margin-left: 25px !important;
-    /* margin-right: 25px !important; */
     display: flex;
     justify-content: space-between;
+    margin: 42px 27px;
+}
+
+.grid-container {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: auto auto auto;
+    column-gap: 7px;
+    row-gap: 43px;
 }
 
 .filters div{
@@ -58,7 +68,8 @@ body {
 }
 
 .card{
-    max-width: 403px !important;
+    max-width: 390px !important;
+    max-height: 230px;
 }
 
 .rating-circle-full{
@@ -75,4 +86,14 @@ body {
     width: 12px;
     height: 12px;
     border: 1.5px solid purple;
+}
+
+.pagination-container{
+    margin-top: 26px;
+}
+
+.add-form{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
 }
