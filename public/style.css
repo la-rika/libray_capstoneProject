@@ -120,12 +120,25 @@ body {
     width: 94%;
 }
 
+select:hover{
+    cursor: pointer;
+}
+
+.not-text-area:hover{
+    cursor: text;
+}
+
+.rating-label{
+    font-size: 16px;
+    color: #757575;
+    margin-left: 2px;
+}
+
 .add-form select{
     width: 94%;
     border: 1px solid #034C8C;
     border-radius: 4px;
     padding: 2px 5px;
-    margin-top: 32px;
     display: block;
 }
 
@@ -135,6 +148,7 @@ body {
     height: 71%;
     border-radius: 14px;
     border-color: #034C8C;
+    padding: 10px;
 }
 
 .label-img{
@@ -158,4 +172,31 @@ body {
 	overflow: hidden;
 	position: absolute;
 	z-index: -1;
+}
+
+.form-btn{
+    display: flex;
+    justify-content: space-between;
+    width: 52%;
+    padding-top: 32px;
+    position: relative;
+    right: 40px;
+}
+
+.form-btn button, .form-btn button:hover{
+    color: white;
+    width: 85px;
+    cursor: pointer;
+}
+
+.info{
+    position: relative;
+    top: 88px;
+    font-size: 12px;
+}
+
+.footer p{
+    color: #034C8C;
+    font-size: 11px;
+    margin-left: 20px;
 }

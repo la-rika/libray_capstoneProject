@@ -17,7 +17,7 @@
             </div>
             <div>
                 <div class="grid-container">
-                    <% for(var x=0; x<=5;x++){ %>
+                    <% books.forEach(book =>{ %>
                         <div class="card">
                             <div class="row g-0">
                                 <div class="col-md-4">
@@ -25,17 +25,19 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
+                                        <h5 class="card-title"><%= book.title %></h5>
+                                        <p><%= book.author %></p>
                                         <div class="rating-circle-full"></div>
                                         <p class="card-text">This is a wider card with supporting text below as a
                                             natural
                                             lead-in to
                                             additional content. This content is a little bit longer.</p>
+                                        <p>ISBN: <%=book.isbn%></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <% } %>
+                        <% }) %>
 
                 </div>
                 <nav aria-label="Page navigation example" class="pagination-container">
@@ -65,16 +67,27 @@
         <div class="form-container">
             <div class="add-form">
                 <div>
-                    <input class="not-text-area" type="text" name="" id="">
-                    <input class="not-text-area" type="text" name="" id="">
-                    <select name="" id="">
-                        <option value="">ciao</option>
+                    <input class="not-text-area" type="text" name="" id=""  placeholder="Title" autofocus>
+                    <input class="not-text-area" type="text" name="" id="" placeholder="Author">
+                    <label for="rating" class="rating-label">Rating</label>
+                    <select name="" id="rating">
+                        <option value="">0</option>
+                        <option value="">1</option>
+                        <option value="">2</option>
+                        <option value="">3</option>
+                        <option value="">4</option>
+                        <option value="">5</option>
                     </select>
                     <label for="book-cover" class="label-img">+</label>
                     <input class="img-input" type="file" src="" alt="" name="bookCover" id="book-cover">
+                    <p class="info">*Attach book cover image</p>
                 </div>
                 <div>
-                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                    <textarea name="" id="" cols="30" rows="10" placeholder="Plot (max 30 characters)"></textarea>
+                    <div class="form-btn">
+                        <button type="reset" class="btn btn-danger"">RESET</button>
+                        <button type=" submit" class="btn" style="background-color: #034C8C;">ADD</button>
+                    </div>
                 </div>
             </div>
         </div>
