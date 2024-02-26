@@ -48,10 +48,28 @@ body {
     margin: 42px 27px;
 }
 
+.no-space-card-container{
+    display: flex;
+    margin: 42px 27px;
+}
+
+.list{
+    margin-left: 22px;
+    width: 100%;
+}
+
 .grid-container {
     display: grid;
     justify-content: center;
     grid-template-columns: auto auto auto;
+    column-gap: 7px;
+    row-gap: 43px;
+}
+
+.grid-2-container{
+    display: grid;
+    justify-content: start;
+    grid-template-columns: auto auto;
     column-gap: 7px;
     row-gap: 43px;
 }
@@ -177,7 +195,7 @@ select:hover{
 .form-btn{
     display: flex;
     justify-content: space-between;
-    width: 52%;
+    width: 57%;
     padding-top: 32px;
     position: relative;
     right: 40px;
@@ -191,8 +209,8 @@ select:hover{
 
 .info{
     position: relative;
-    top: 88px;
-    font-size: 12px;
+    top: 87px;
+    font-size: 10px;
 }
 
 .footer p{
