@@ -10,59 +10,65 @@
         <div class="bookmark-container">
             <div class="title">BOOK LIST</div>
         </div>
-        <div class="container <% if(books.length>2){%>  cards-container <% }else{ %> no-space-card-container <% } %> ">
-            <div class="filters">
-                <div><img src="images/elements/settings.svg" alt=""></div>
-                <div><a href="#add-form"><img src="images/elements/add.svg" alt=""></a></div>
-            </div>
-            <div class="<% if(books.length<=2){%> list <% } %> ">
-                <div class="<% if(books.length>2){%> grid-container <% }else{ %> grid-2-container <% } %>">
-                    <!-- TODO: fare un if in cui in caso ci sono solo due card il layout delle colone e' auto auto e non auto auto auto -->
-                    <% books.forEach(book=>{ %>
-                        <div class="card mb-3" style="max-width: 540px;">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="..." class="img-fluid rounded-start" alt="...">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">
-                                            <%= book.title %>
-                                        </h5>
-                                        <p class="card-text">
-                                            <%= book.author %>
-                                        </p>
-                                        <p class="card-text">This is a wider card with supporting text below as a
-                                            natural lead-in to additional content. This content is a little bit longer.
-                                        </p>
-                                        <!-- <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p> -->
+        <% if(books.length>0){ %>
+            <div
+                class="container <% if(books.length>2){%>  cards-container <% }else{ %> no-space-card-container <% } %> ">
+                <div class="filters">
+                    <div><img src="images/elements/settings.svg" alt=""></div>
+                    <div><a href="#add-form"><img src="images/elements/add.svg" alt=""></a></div>
+                </div>
+                <div class="<% if(books.length<=2){%> list <% } %> ">
+                    <div class="<% if(books.length>2){%> grid-container <% }else{ %> grid-2-container <% } %>">
+                        <!-- TODO: fare un if in cui in caso ci sono solo due card il layout delle colone e' auto auto e non auto auto auto -->
+                        <% books.forEach(book=>{ %>
+                            <div class="card mb-3" style="max-width: 540px;">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img src="..." class="img-fluid rounded-start" alt="...">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                <%= book.title %>
+                                            </h5>
+                                            <p class="card-text">
+                                                <%= book.author %>
+                                            </p>
+                                            <p class="card-text">This is a wider card with supporting text below as a
+                                                natural lead-in to additional content. This content is a little bit
+                                                longer.
+                                            </p>
+                                            <!-- <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p> -->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <% }) %>
+                            <% }) %>
 
 
+                    </div>
+                    <nav aria-label="Page navigation example" class="pagination-container">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
-                <nav aria-label="Page navigation example" class="pagination-container">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
             </div>
-        </div>
+            <% }else{ %>
+                <div class="no-books">No books available yet, add one trough the form below!</div>
+                <% } %>
     </section>
     <section class="add-container" style="height: 649px;" id="add-form">
         <div class="bookmark-container">
@@ -71,23 +77,24 @@
         <div class="form-container">
             <form action="/" method="post" class="add-form">
                 <div>
-                    <input class="not-text-area" type="text" name="title" id="" placeholder="Title" autofocus>
-                    <input class="not-text-area" type="text" name="author" id="" placeholder="Author">
-                    <label for="rating" class="rating-label">Review</label>
+                    <input class="not-text-area" type="text" name="title" id="" placeholder="Title*">
+                    <input class="not-text-area" type="text" name="author" id="" placeholder="Author*">
+                    <label for="rating" class="rating-label">Points*</label>
                     <select name="points" id="rating">
-                        <option value="">0</option>
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                        <option value="">4</option>
-                        <option value="">5</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
                     </select>
                     <label for="book-cover" class="label-img">+</label>
                     <input class="img-input" type="file" src="" alt="" name="bookCover" id="book-cover">
                     <p class="info">*Attach book cover image or it will be added automatically</p>
                 </div>
                 <div>
-                    <textarea name="review" id="" cols="30" rows="10" placeholder="Plot (max 30 characters)"></textarea>
+                    <textarea name="review" id="" cols="30" rows="10"
+                        placeholder="Review (max 30 characters)*"></textarea>
                     <div class="form-btn">
                         <button type="reset" class="btn btn-danger"">RESET</button>
                         <button type=" submit" class="btn" style="background-color: #034C8C;">ADD</button>

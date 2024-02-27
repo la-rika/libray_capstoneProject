@@ -58,6 +58,21 @@ body {
     width: 100%;
 }
 
+.no-books{
+    height: 434px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 19px;
+    border: 2px solid #E1E1E1;
+    margin-top: 67px !important;
+    margin-bottom: 135px !important;
+    width: 70%;
+    border-radius: 16px;
+    background-color: #E1E1E1;
+    margin: 0  auto;
+}
+
 .grid-container {
     display: grid;
     justify-content: center;

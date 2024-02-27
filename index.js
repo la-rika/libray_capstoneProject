@@ -29,17 +29,21 @@ let books;
 app.get('/', async(req, res) => {
     books = [];
     try {
-        await db.query('SELECT * FROM books')
+        await db.query('SELECT * FROM books join opinions on books.opinion_id = opinions.id')
         .then((response)=>{
             // console.log(response.rows);
-            response.rows.forEach(el => {
-                books = [...books,{
-                    id: el.id,
-                    title: el.title,
-                    author: el.author,
-                }]
-            });
-            console.log(books)
+            if(response.rows.length>0){
+                response.rows.forEach(el => {
+                    books = [...books,{
+                        id: el.id,
+                        title: el.title,
+                        author: el.author,
+                        points: el.rating,
+                        review: el.review
+                    }]
+                });
+                console.log(books)
+            }
         })
     } catch (error) {
         console.log(error)
@@ -51,14 +55,20 @@ app.get('/', async(req, res) => {
 app.post('/', (req,res)=>{
     const title = req.body.title;
     const author = req.body.author;
-    const points = req.body.points;
+    const points =req.body.points;
+    // console.log(points)
     const review = req.body.review;
+    let opinion_id;
 
-    let addedBook={}
+    if(books.length===0){
+        opinion_id=1
+    }else{
+        opinion_id = books.length
+    }
 
     try {
-        db.query('INSERT INTO books (title, author) VALUES ($1,$2)',[title,author])
         db.query('insert into opinions (review,rating) values($1,$2)', [review,points])
+        db.query('INSERT INTO books (title, author, opinion_id) VALUES ($1,$2,$3)',[title,author,opinion_id])
     } catch (error) {
         console.log(error)
     }
