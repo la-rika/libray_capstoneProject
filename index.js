@@ -25,13 +25,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 let books = [];
+let booksInDB;
 
 app.get('/', async (req, res) => {
     books = [];
+    booksInDB=[];
     try {
         await db.query('SELECT * FROM books join opinions on books.opinion_id = opinions.id')
             .then((response) => {
-                // console.log(response.rows);
                 if (response.rows.length > 0) {
                     response.rows.forEach(el => {
                         books = [...books, {
@@ -42,13 +43,12 @@ app.get('/', async (req, res) => {
                             review: el.review
                         }]
                     });
-                    console.log(books)
                 }
             })
     } catch (error) {
         console.log(error)
     }
-
+    booksInDB=books
     res.render('index.ejs', { books: books })
 })
 
@@ -56,17 +56,16 @@ app.post('/', (req, res) => {
     const title = req.body.title;
     const author = req.body.author;
     const points = req.body.points;
-    // console.log(points)
     const review = req.body.review;
+    let id ;
     let opinion_id;
 
-    if (books?.length === 0) {
-        opinion_id = 1
-    } else {
-        opinion_id = books?.length
+    if(booksInDB?.length>0){
+        id = booksInDB.length+1
+    }else{
+        id = 1
     }
-    console.log(opinion_id)
-    const id = opinion_id
+    opinion_id=id
 
     try {
         db.query('insert into opinions (id,review,rating) values($1,$2,$3)', [id,review, points])
