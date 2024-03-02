@@ -24,51 +24,55 @@ const __dirname = path.dirname(__filename); //soluzione per sistemare __dirname 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-let books;
+let books = [];
 
-app.get('/', async(req, res) => {
+app.get('/', async (req, res) => {
     books = [];
     try {
         await db.query('SELECT * FROM books join opinions on books.opinion_id = opinions.id')
-        .then((response)=>{
-            // console.log(response.rows);
-            if(response.rows.length>0){
-                response.rows.forEach(el => {
-                    books = [...books,{
-                        id: el.id,
-                        title: el.title,
-                        author: el.author,
-                        points: el.rating,
-                        review: el.review
-                    }]
-                });
-                console.log(books)
-            }
-        })
+            .then((response) => {
+                // console.log(response.rows);
+                if (response.rows.length > 0) {
+                    response.rows.forEach(el => {
+                        books = [...books, {
+                            id: el.id,
+                            title: el.title,
+                            author: el.author,
+                            points: el.rating,
+                            review: el.review
+                        }]
+                    });
+                    console.log(books)
+                }
+            })
     } catch (error) {
         console.log(error)
     }
 
-    res.render('index.ejs', {books:books})
+    res.render('index.ejs', { books: books })
 })
 
-app.post('/', (req,res)=>{
+app.post('/', (req, res) => {
     const title = req.body.title;
     const author = req.body.author;
-    const points =req.body.points;
+    const points = req.body.points;
     // console.log(points)
     const review = req.body.review;
     let opinion_id;
 
-    if(books.length===0){
-        opinion_id=1
-    }else{
-        opinion_id = books.length
+    if (books?.length === 0) {
+        opinion_id = 1
+    } else {
+        opinion_id = books?.length
     }
+    console.log(opinion_id)
+    const id = opinion_id
 
     try {
-        db.query('insert into opinions (review,rating) values($1,$2)', [review,points])
-        db.query('INSERT INTO books (title, author, opinion_id) VALUES ($1,$2,$3)',[title,author,opinion_id])
+        db.query('insert into opinions (id,review,rating) values($1,$2,$3)', [id,review, points])
+        .then(()=>{
+            db.query('INSERT INTO books (id,title, author, opinion_id) VALUES ($1,$2,$3,$4)', [id,title, author, opinion_id])
+        })
     } catch (error) {
         console.log(error)
     }
