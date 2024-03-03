@@ -35,6 +35,9 @@
                                             </p>
                                             <div class="rating-circle-full"></div>
                                             <p class="card-text"><%= book.review %></p>
+                                            <form action="/delete" method="post">
+                                                <button value="<%= book.id %>"  name="bookId" style="font-size: 13px;font-weight:700px;color:red;" class="btn delete" type="submit">DELETE</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

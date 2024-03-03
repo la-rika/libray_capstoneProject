@@ -125,6 +125,12 @@ body {
     margin-top: -8px
 }
 
+.delete{
+    position: relative;
+    top: 46px;
+    left: 140px;
+}
+
 .pagination-container{
     margin-top: 26px;
 }

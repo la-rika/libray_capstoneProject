@@ -27,9 +27,16 @@ app.use(express.static("public"));
 let books = [];
 let booksInDB;
 
+//TODO: gestire i 5 pallini che si rimepiono in base a quanti punti sono sttai dati al libro
+//TODO: aggiungere possibilita' di modificare i dati del libro tramite una modale con il form gia compilato con i dati 
+//TODO: aggiungere le immagini delle copertine usando la api di angela
+//TODO: aggiungere la possibilita di fare un sort dei libri basato sui punti dati 
+//TODO: error handling, aggiungere messaggi di errore in caso qualcoa non funziona
+
 app.get('/', async (req, res) => {
     books = [];
-    booksInDB=[];
+    booksInDB = [];
+
     try {
         await db.query('SELECT * FROM books join opinions on books.opinion_id = opinions.id')
             .then((response) => {
@@ -48,8 +55,8 @@ app.get('/', async (req, res) => {
     } catch (error) {
         console.log(error)
     }
-    booksInDB=books
-    res.render('index.ejs', { books: books })
+    booksInDB = books
+    res.render('index.ejs', { books: books})
 })
 
 app.post('/', (req, res) => {
@@ -57,21 +64,32 @@ app.post('/', (req, res) => {
     const author = req.body.author;
     const points = req.body.points;
     const review = req.body.review;
-    let id ;
+    let id;
     let opinion_id;
 
-    if(booksInDB?.length>0){
-        id = booksInDB.length+1
-    }else{
+    if (booksInDB?.length > 0) {
+        id = booksInDB.length + 1
+    } else {
         id = 1
     }
-    opinion_id=id
+    opinion_id = id
 
     try {
-        db.query('insert into opinions (id,review,rating) values($1,$2,$3)', [id,review, points])
-        .then(()=>{
-            db.query('INSERT INTO books (id,title, author, opinion_id) VALUES ($1,$2,$3,$4)', [id,title, author, opinion_id])
-        })
+        db.query('insert into opinions (id,review,rating) values($1,$2,$3)', [id, review, points])
+            .then(() => {
+                db.query('INSERT INTO books (id,title, author, opinion_id) VALUES ($1,$2,$3,$4)', [id, title, author, opinion_id])
+            })
+    } catch (error) {
+        console.log(error)
+    }
+    res.redirect('/')
+})
+
+app.post('/delete', async (req, res) => {
+    const id = req.body.bookId
+    try {
+        await db.query('DELETE from books WHERE  id = $1', [id]);
+        await db.query('DELETE from opinions WHERE  id = $1', [id])
     } catch (error) {
         console.log(error)
     }
