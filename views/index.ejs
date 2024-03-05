@@ -33,17 +33,36 @@
                                             <p class="card-text">
                                                 <%= book.author %>
                                             </p>
-                                            <div class="rating-circle-full"></div>
-                                            <p class="card-text"><%= book.review %></p>
-                                            <form action="/delete" method="post">
-                                                <button value="<%= book.id %>"  name="bookId" style="font-size: 13px;font-weight:700px;color:red;" class="btn delete" type="submit">DELETE</button>
-                                            </form>
+                                            <div style="display:flex ;">
+                                                <% for( let index=1; index <=5; index++ ) { %>
+                                                    <% if (index<=book.points) { %>
+                                                        <div class="rating-circle-full"></div>
+                                                        <% }else{%>
+                                                            <div class="rating-circle-empty"></div>
+                                                            <%} %>
+                                                                <% } %>
+                                            </div>
+
+                                            <p class="card-text">
+                                                <%= book.review || 'No review sumbitted' %>
+                                            </p>
+                                            <div class="card-buttons">
+                                                <form action="/edit:<%= book.id %>" method="patch">
+                                                    <button value="<%= book.id %>" name="bookId"
+                                                        style="font-size: 13px;font-weight:700px;color: #034C8C;" "
+                                                        class=" btn delete" type="submit">EDIT</button>
+                                                </form>
+                                                <form action="/delete" method="post">
+                                                    <button value="<%= book.id %>" name="bookId"
+                                                        style="font-size: 13px;font-weight:700px;color:red;"
+                                                        class="btn delete" type="submit">DELETE</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <% }) %>
-
 
                     </div>
                     <nav aria-label="Page navigation example" class="pagination-container">
@@ -76,10 +95,10 @@
         <div class="form-container">
             <form action="/" method="post" class="add-form">
                 <div>
-                    <input class="not-text-area" type="text" name="title" id="" placeholder="Title*">
-                    <input class="not-text-area" type="text" name="author" id="" placeholder="Author*">
+                    <input class="not-text-area" type="text" name="title" id="" placeholder="Title*" required>
+                    <input class="not-text-area" type="text" name="author" id="" placeholder="Author*" required>
                     <label for="rating" class="rating-label">Points*</label>
-                    <select name="points" id="rating">
+                    <select name="points" id="rating" required>
                         <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -92,8 +111,8 @@
                     <p class="info">*Attach book cover image or it will be added automatically</p>
                 </div>
                 <div>
-                    <textarea name="review" id="" cols="30" rows="10"
-                        placeholder="Review (max 30 characters)*"></textarea>
+                    <textarea name="review" id="" cols="30" rows="10" placeholder="Review (max 100 characters)"
+                        maxlength="100"></textarea>
                     <div class="form-btn">
                         <button type="reset" class="btn btn-danger"">RESET</button>
                         <button type=" submit" class="btn" style="background-color: #034C8C;">ADD</button>

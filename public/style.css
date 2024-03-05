@@ -113,7 +113,8 @@ body {
     width: 12px;
     height: 12px;
     background-color: #034C8C;
-    margin-top: -8px
+    margin-top: -8px;
+    margin-right:6px;
 }
 
 .rating-circle-empty{
@@ -122,13 +123,16 @@ body {
     width: 12px;
     height: 12px;
     border: 1.5px solid #034C8C;
-    margin-top: -8px
+    margin-top: -8px;
+    margin-right:6px;
 }
 
-.delete{
-    position: relative;
-    top: 46px;
-    left: 140px;
+.card-buttons{
+    display: flex;
+    position:absolute;
+    bottom: 4px;
+    right: 17px;
+    border: none;
 }
 
 .pagination-container{

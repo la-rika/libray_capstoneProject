@@ -27,7 +27,6 @@ app.use(express.static("public"));
 let books = [];
 let booksInDB;
 
-//TODO: gestire i 5 pallini che si rimepiono in base a quanti punti sono sttai dati al libro
 //TODO: aggiungere possibilita' di modificare i dati del libro tramite una modale con il form gia compilato con i dati 
 //TODO: aggiungere le immagini delle copertine usando la api di angela
 //TODO: aggiungere la possibilita di fare un sort dei libri basato sui punti dati 
