@@ -28,8 +28,9 @@ let books = [];
 let booksInDB;
 
 //TODO: aggiungere possibilita' di modificare i dati del libro tramite una modale con il form gia compilato con i dati 
-//TODO: aggiungere le immagini delle copertine usando la api di angela
-//TODO: aggiungere la possibilita di fare un sort dei libri basato sui punti dati 
+//TODO: gestire inserimento file nel form
+//TODO: aggiungere le immagini delle copertine usando la api di angela 
+//TODO: gestire filtri
 //TODO: error handling, aggiungere messaggi di errore in caso qualcoa non funziona
 
 app.get('/', async (req, res) => {
@@ -55,10 +56,10 @@ app.get('/', async (req, res) => {
         console.log(error)
     }
     booksInDB = books
-    res.render('index.ejs', { books: books})
+    res.render('index.ejs', { books: books })
 })
 
-app.post('/', (req, res) => {
+app.post('/', async (req, res) => {
     const title = req.body.title;
     const author = req.body.author;
     const points = req.body.points;
@@ -66,9 +67,12 @@ app.post('/', (req, res) => {
     let id;
     let opinion_id;
 
+
     if (booksInDB?.length > 0) {
+        console.log('ciao',booksInDB)
         id = booksInDB.length + 1
     } else {
+        console.log('come',booksInDB)
         id = 1
     }
     opinion_id = id
