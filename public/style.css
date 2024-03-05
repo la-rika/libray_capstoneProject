@@ -236,6 +236,31 @@ select:hover{
     cursor: pointer;
 }
 
+.edit-label-img{
+    border: 1px solid #034C8C;
+    width: 102px;
+    height: 98px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 69px;
+    margin-top: 67px;
+    color: #034C8C;
+    margin-left: 22px;
+    border-radius: 17px;
+}
+
+.edit-img-input{
+    margin-left: 22px;
+    margin-top: 63px;
+    width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
 .info{
     position: relative;
     top: 87px;

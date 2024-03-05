@@ -27,12 +27,13 @@ app.use(express.static("public"));
 let books = [];
 let booksInDB;
 
-//TODO: fare modale per modificare il libro
-//TODO: aggiungere possibilita' di modificare i dati del libro tramite una modale con il form gia compilato con i dati 
+//TODO: gestire il click del bottone edit che rende true una variabile che mostra la card in versione edit 
+//TODO: gestire la foto nel edit
 //TODO: gestire inserimento file nel form
 //TODO: aggiungere le immagini delle copertine usando la api di angela 
 //TODO: gestire filtri
 //TODO: error handling, aggiungere messaggi di errore in caso qualcoa non funziona
+
 
 app.get('/', async (req, res) => {
     books = [];
@@ -57,7 +58,7 @@ app.get('/', async (req, res) => {
         console.log(error)
     }
     booksInDB = books
-    res.render('index.ejs', { books: books })
+    res.render('index.ejs', { books: books})
 })
 
 app.post('/', async (req, res) => {
@@ -99,6 +100,8 @@ app.post('/delete', async (req, res) => {
     }
     res.redirect('/')
 })
+
+
 
 app.listen(port || 4000, () => {
     console.log(`server is up and running on port ${port}`)

@@ -20,49 +20,91 @@
                 <div class="<% if(books.length<=2){%> list <% } %> ">
                     <div class="<% if(books.length>2){%> grid-container <% }else{ %> grid-2-container <% } %>">
                         <% books.forEach(book=>{ %>
-                            <div class="card mb-3" style="max-width: 540px;">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="..." class="img-fluid rounded-start" alt="...">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">
-                                                <%= book.title %>
-                                            </h5>
-                                            <p class="card-text">
-                                                <%= book.author %>
-                                            </p>
-                                            <div style="display:flex ;">
-                                                <% for( let index=1; index <=5; index++ ) { %>
-                                                    <% if (index<=book.points) { %>
-                                                        <div class="rating-circle-full"></div>
-                                                        <% }else{%>
-                                                            <div class="rating-circle-empty"></div>
-                                                            <%} %>
-                                                                <% } %>
-                                            </div>
-
-                                            <p class="card-text">
-                                                <%= book.review || 'No review submitted' %>
-                                            </p>
-                                            <div class="card-buttons">
-                                                <form action="/edit:<%= book.id %>" method="patch">
-                                                    <button value="<%= book.id %>" name="bookId"
-                                                        style="font-size: 13px;font-weight:700px;color: #034C8C;" "
-                                                        class=" btn delete" type="submit">EDIT</button>
-                                                </form>
-                                                <form action="/delete" method="post">
-                                                    <button value="<%= book.id %>" name="bookId"
-                                                        style="font-size: 13px;font-weight:700px;color:red;"
-                                                        class="btn delete" type="submit">DELETE</button>
-                                                </form>
+                            <% if (false) { %>
+                                <div class="card mb-3" style="max-width: 540px;">
+                                    <div class="row g-0">
+                                        <div class="col-md-4">
+                                            <label for="book-cover" class="edit-label-img">+</label>
+                                            <input class="edit-img-input" type="file" src="" alt="" name="bookCover"
+                                                id="book-cover">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body" style="font-size:13px">
+                                                <input class="not-text-area" value="<%= book.title %>" type="text"
+                                                    name="title" id="" placeholder="Title*" required>
+                                                <input class="not-text-area" value="<%= book.author %>" type="text"
+                                                    name="author" id="" placeholder="Author*" required>
+                                                <label for="rating" class="rating-label"
+                                                    style="font-size:13px">Points*</label>
+                                                <select name="points" id="rating" style="margin-bottom:10px" required>
+                                                    <option value="0">0</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                </select>
+                                                <textarea name="review" value="<%= book.review  %>" id="" cols="30"
+                                                    rows="10" placeholder="Review (max 100 characters)" maxlength="100"
+                                                    style="width: 209px;height: 80px;font-size:12px"></textarea>
+                                                <div class="card-buttons">
+                                                    <form action="/edit" method="patch">
+                                                        <button value="<%= book.id %>" name="bookId"
+                                                            style="font-size: 13px;font-weight:700px;color: #034C8C;" "
+                                                            class=" btn delete" type="submit">EDIT</button>
+                                                    </form>
+                                                    <form action="/delete" method="post">
+                                                        <button value="<%= book.id %>" name="bookId"
+                                                            style="font-size: 13px;font-weight:700px;color:red;"
+                                                            class="btn delete" type="submit">DELETE</button>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <% }) %>
+                                <% }else{%>
+                                    <div class="card mb-3" style="max-width: 540px;">
+                                        <div class="row g-0">
+                                            <div class="col-md-4">
+                                                <img src="..." class="img-fluid rounded-start" alt="...">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">
+                                                        <%= book.title %>
+                                                    </h5>
+                                                    <p class="card-text">
+                                                        <%= book.author %>
+                                                    </p>
+                                                    <div style="display:flex ;">
+                                                        <% for( let index=1; index <=5; index++ ) { %>
+                                                            <% if (index<=book.points) { %>
+                                                                <div class="rating-circle-full"></div>
+                                                                <% }else{%>
+                                                                    <div class="rating-circle-empty"></div>
+                                                                    <%} %>
+                                                                        <% } %>
+                                                    </div>
+                                                    <p class="card-text">
+                                                        <%= book.review || 'No review submitted' %>
+                                                    </p>
+                                                    <div class="card-buttons">
+                                                        <button value="<%= book.id %>" name="bookId"
+                                                            style="font-size: 13px;font-weight:700px;color: #034C8C;" "
+                                                                    class="btn delete" >EDIT</button>
+                                                        <form action="/delete" method="post">
+                                                            <button value="<%= book.id %>" name="bookId"
+                                                                style="font-size: 13px;font-weight:700px;color:red;"
+                                                                class="btn delete" type="submit">DELETE</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%} %>
+                                        <% }) %>
 
                     </div>
                     <nav aria-label="Page navigation example" class="pagination-container">
