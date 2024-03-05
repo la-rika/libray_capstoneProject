@@ -27,6 +27,7 @@ app.use(express.static("public"));
 let books = [];
 let booksInDB;
 
+//TODO: fare modale per modificare il libro
 //TODO: aggiungere possibilita' di modificare i dati del libro tramite una modale con il form gia compilato con i dati 
 //TODO: gestire inserimento file nel form
 //TODO: aggiungere le immagini delle copertine usando la api di angela 
