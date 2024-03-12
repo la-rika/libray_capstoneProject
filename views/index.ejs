@@ -20,7 +20,7 @@
                 <div class="<% if(books.length<=2){%> list <% } %> ">
                     <div class="<% if(books.length>2){%> grid-container <% }else{ %> grid-2-container <% } %>">
                         <% books.forEach(book=>{ %>
-                            <% if (false) { %>
+                            <% if (true) { %>
                                 <div class="card mb-3" style="max-width: 540px;">
                                     <div class="row g-0">
                                         <div class="col-md-4">
@@ -36,7 +36,8 @@
                                                     name="author" id="" placeholder="Author*" required>
                                                 <label for="rating" class="rating-label"
                                                     style="font-size:13px">Points*</label>
-                                                <select name="points" id="rating" style="margin-bottom:10px" required>
+                                                <select name="points" id="rating" style="margin-bottom:10px"  required>
+                                                    <option value="" selected disabled hidden><%= book.points %></option>
                                                     <option value="0">0</option>
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
@@ -48,7 +49,7 @@
                                                     rows="10" placeholder="Review (max 100 characters)" maxlength="100"
                                                     style="width: 209px;height: 80px;font-size:12px"></textarea>
                                                 <div class="card-buttons">
-                                                    <form action="/edit" method="patch">
+                                                    <form action="/edit" method="post">
                                                         <button value="<%= book.id %>" name="bookId"
                                                             style="font-size: 13px;font-weight:700px;color: #034C8C;" "
                                                             class=" btn delete" type="submit">EDIT</button>

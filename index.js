@@ -58,7 +58,7 @@ app.get('/', async (req, res) => {
         console.log(error)
     }
     booksInDB = books
-    res.render('index.ejs', { books: books})
+    res.render('index.ejs', { books: books })
 })
 
 app.post('/', async (req, res) => {
@@ -71,10 +71,10 @@ app.post('/', async (req, res) => {
 
 
     if (booksInDB?.length > 0) {
-        console.log('ciao',booksInDB)
+        // console.log('ciao', booksInDB)
         id = booksInDB.length + 1
     } else {
-        console.log('come',booksInDB)
+        // console.log('come', booksInDB)
         id = 1
     }
     opinion_id = id
@@ -101,7 +101,22 @@ app.post('/delete', async (req, res) => {
     res.redirect('/')
 })
 
-
+app.post('/edit', async(req, res) => {
+    const id = req.body.bookId;
+    const title = req.body.title;
+    const author = req.body.author;
+    const opinion_id = db.query('select opinion_id from books where id = $1',[id])
+    const points = req.body.points;
+    const review = req.body.review;
+    console.log(id,title,author,points,review)
+    try {
+        await db.query('UPDATE books  SET title = $1, author = $2, opinion_id = $3 WHERE id = $4',[title, author, opinion_id, id]);
+        await db.query('UPDATE opinions  SET review = $1, rating = $2 WHERE id = $3',[review, points, id]);
+    } catch (error) {
+        console.log(error)
+    }
+    res.redirect('/')
+})
 
 app.listen(port || 4000, () => {
     console.log(`server is up and running on port ${port}`)
