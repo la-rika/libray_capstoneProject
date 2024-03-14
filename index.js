@@ -5,6 +5,7 @@ import ejs from 'ejs';
 import pg from 'pg';
 import _ from 'lodash';
 import bodyParser from 'body-parser'
+import https from 'https'
 
 const app = express();
 const port = 3000;
@@ -25,12 +26,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 let books = [];
+let bookCovers = [];
 let booksInDB;
+let editMode = false;
 
-//TODO: gestire il click del bottone edit che rende true una variabile che mostra la card in versione edit 
 //TODO: aggiungere le immagini delle copertine usando la api di angela 
+//TODO: fare in modo che entri in edit solo la card su cui si ha cliccato edit 
 //TODO: gestire filtri
 //TODO: error handling, aggiungere messaggi di errore in caso qualcoa non funziona
+
 
 
 app.get('/', async (req, res) => {
@@ -47,7 +51,7 @@ app.get('/', async (req, res) => {
                             title: el.title,
                             author: el.author,
                             points: el.rating,
-                            review: el.review
+                            review: el.review,
                         }]
                     });
                 }
@@ -56,7 +60,7 @@ app.get('/', async (req, res) => {
         console.log(error)
     }
     booksInDB = books
-    res.render('index.ejs', { books: books })
+    res.render('index.ejs', { books: books, editMode: editMode})
 })
 
 app.post('/', async (req, res) => {
@@ -99,17 +103,22 @@ app.post('/delete', async (req, res) => {
     res.redirect('/')
 })
 
-app.post('/edit', async(req, res) => {
+app.post('/editOn', (req,res)=>{
+    editMode = true;
+    res.redirect('/')
+})
+
+app.post('/edit', async (req, res) => {
     const id = req.body.bookId;
     const title = req.body?.title;
     const author = req.body?.author;
     const points = req.body?.points;
     const review = req.body?.review;
+    editMode = false;
 
-    console.log(id,title,author,points,review)
     try {
-        await db.query('UPDATE books  SET title = $1, author = $2 WHERE id = $3',[title, author, id]);
-        await db.query('UPDATE opinions  SET review = $1, rating = $2 WHERE id = $3',[review, points, id]);
+        await db.query('UPDATE books  SET title = $1, author = $2 WHERE id = $3', [title, author, id]);
+        await db.query('UPDATE opinions  SET review = $1, rating = $2 WHERE id = $3', [review, points, id]);
     } catch (error) {
         console.log(error)
     }
