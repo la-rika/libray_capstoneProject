@@ -23,13 +23,9 @@
                             <% if (true) { %>
                                 <div class="card mb-3" style="max-width: 540px;">
                                     <div class="row g-0">
-                                        <div class="col-md-4">
-                                            <label for="book-cover" class="edit-label-img">+</label>
-                                            <input class="edit-img-input" type="file" src="" alt="" name="bookCover"
-                                                id="book-cover">
-                                        </div>
                                         <div class="col-md-8">
                                             <div class="card-body" style="font-size:13px">
+                                                <form action="/edit" method="post">
                                                 <input class="not-text-area" value="<%= book.title %>" type="text"
                                                     name="title" id="" placeholder="Title*" required>
                                                 <input class="not-text-area" value="<%= book.author %>" type="text"
@@ -45,11 +41,10 @@
                                                     <option value="4">4</option>
                                                     <option value="5">5</option>
                                                 </select>
-                                                <textarea name="review" value="<%= book.review  %>" id="" cols="30"
+                                                <textarea name="review" id="" cols="30"
                                                     rows="10" placeholder="Review (max 100 characters)" maxlength="100"
-                                                    style="width: 209px;height: 80px;font-size:12px"></textarea>
+                                                    style="width: 209px;height: 80px;font-size:12px"><%= book.review  %></textarea>
                                                 <div class="card-buttons">
-                                                    <form action="/edit" method="post">
                                                         <button value="<%= book.id %>" name="bookId"
                                                             style="font-size: 13px;font-weight:700px;color: #034C8C;" "
                                                             class=" btn delete" type="submit">EDIT</button>
@@ -149,9 +144,6 @@
                         <option value="4">4</option>
                         <option value="5">5</option>
                     </select>
-                    <label for="book-cover" class="label-img">+</label>
-                    <input class="img-input" type="file" src="" alt="" name="bookCover" id="book-cover">
-                    <p class="info">*Attach book cover image or it will be added automatically</p>
                 </div>
                 <div>
                     <textarea name="review" id="" cols="30" rows="10" placeholder="Review (max 100 characters)"

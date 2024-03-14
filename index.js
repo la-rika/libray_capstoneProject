@@ -28,8 +28,6 @@ let books = [];
 let booksInDB;
 
 //TODO: gestire il click del bottone edit che rende true una variabile che mostra la card in versione edit 
-//TODO: gestire la foto nel edit
-//TODO: gestire inserimento file nel form
 //TODO: aggiungere le immagini delle copertine usando la api di angela 
 //TODO: gestire filtri
 //TODO: error handling, aggiungere messaggi di errore in caso qualcoa non funziona
@@ -103,14 +101,14 @@ app.post('/delete', async (req, res) => {
 
 app.post('/edit', async(req, res) => {
     const id = req.body.bookId;
-    const title = req.body.title;
-    const author = req.body.author;
-    const opinion_id = db.query('select opinion_id from books where id = $1',[id])
-    const points = req.body.points;
-    const review = req.body.review;
+    const title = req.body?.title;
+    const author = req.body?.author;
+    const points = req.body?.points;
+    const review = req.body?.review;
+
     console.log(id,title,author,points,review)
     try {
-        await db.query('UPDATE books  SET title = $1, author = $2, opinion_id = $3 WHERE id = $4',[title, author, opinion_id, id]);
+        await db.query('UPDATE books  SET title = $1, author = $2 WHERE id = $3',[title, author, id]);
         await db.query('UPDATE opinions  SET review = $1, rating = $2 WHERE id = $3',[review, points, id]);
     } catch (error) {
         console.log(error)
