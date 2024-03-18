@@ -130,8 +130,7 @@ body {
 .card-buttons{
     display: flex;
     position:absolute;
-    bottom: 4px;
-    right: 17px;
+    bottom: 5px;
     border: none;
 }
 

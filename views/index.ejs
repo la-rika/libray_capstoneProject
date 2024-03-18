@@ -13,14 +13,14 @@
         <% if(books.length>0){ %>
             <div
                 class="container <% if(books.length>2){%>  cards-container <% }else{ %> no-space-card-container <% } %> ">
-                <div class="filters">
+                <!-- <div class="filters">
                     <div><img src="images/elements/settings.svg" alt=""></div>
                     <div><a href="#add-form"><img src="images/elements/add.svg" alt=""></a></div>
-                </div>
+                </div> -->
                 <div class="<% if(books.length<=2){%> list <% } %> ">
                     <div class="<% if(books.length>2){%> grid-container <% }else{ %> grid-2-container <% } %>">
-                        <% books.forEach(book=>{ %>
-                            <% if (editMode ) { %>
+                        <% books.forEach((book,index)=>{ %>
+                            <% if (editMode && clickedCard== index + 1) { %>
                                 <div class="card mb-3" style="max-width: 540px;">
                                     <div class="row g-0">
                                         <div class="col-md-8">
@@ -32,8 +32,7 @@
                                                         name="author" id="" placeholder="Author*" required>
                                                     <label for="rating" class="rating-label"
                                                         style="font-size:13px">Points*</label>
-                                                    <select name="points" id="rating" style="margin-bottom:10px"
-                                                        required>
+                                                    <select name="points" id="rating" style="margin-bottom:10px">
                                                         <option value="" selected disabled hidden>
                                                             <%= book.points %>
                                                         </option>
@@ -65,8 +64,8 @@
                     <% }else{%>
                         <div class="card mb-3" style="max-width: 540px;">
                             <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="..." class="img-fluid rounded-start" alt="...">
+                                <div class="col-md-4" style="padding: 8px;">
+                                    <img src="<%= book.coverPath %>" class="img-fluid rounded-start" alt="...">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -91,9 +90,8 @@
                                         <div class="card-buttons">
                                             <form action="/editOn" method="post">
                                                 <button value="<%= book.id %>" name="bookId"
-                                                    style="font-size: 13px;font-weight:700px;color: #034C8C;" 
-                                                    class=" btn delete"
-                                                    type="submit">EDIT</button>
+                                                    style="font-size: 13px;font-weight:700px;color: #034C8C;"
+                                                    class=" btn delete" type="submit">EDIT</button>
                                             </form>
                                             <form action="/delete" method="post">
                                                 <button value="<%= book.id %>" name="bookId"
@@ -109,23 +107,26 @@
                             <% }) %>
 
                 </div>
-                <nav aria-label="Page navigation example" class="pagination-container">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                <% if(books.length> 5){%>
+                    <nav aria-label="Page navigation example" class="pagination-container">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <% } %>
+
             </div>
             </div>
             <% }else{ %>
@@ -141,6 +142,7 @@
                 <div>
                     <input class="not-text-area" type="text" name="title" id="" placeholder="Title*" required>
                     <input class="not-text-area" type="text" name="author" id="" placeholder="Author*" required>
+                    <input class="not-text-area" type="text" name="isbn" id="" placeholder="ISBN*" required>
                     <label for="rating" class="rating-label">Points*</label>
                     <select name="points" id="rating" required>
                         <option value="0">0</option>

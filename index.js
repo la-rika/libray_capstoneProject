@@ -29,9 +29,10 @@ let books = [];
 let bookCovers = [];
 let booksInDB;
 let editMode = false;
+let clickedCard = '';
+let coverFetchPath = '';
 
-//TODO: aggiungere le immagini delle copertine usando la api di angela 
-//TODO: fare in modo che entri in edit solo la card su cui si ha cliccato edit 
+// OPTIONAL
 //TODO: gestire filtri
 //TODO: error handling, aggiungere messaggi di errore in caso qualcoa non funziona
 
@@ -46,12 +47,15 @@ app.get('/', async (req, res) => {
             .then((response) => {
                 if (response.rows.length > 0) {
                     response.rows.forEach(el => {
+                        coverFetchPath = `https://covers.openlibrary.org/b/isbn/${el.isbn}-M.jpg`
                         books = [...books, {
                             id: el.id,
                             title: el.title,
                             author: el.author,
                             points: el.rating,
                             review: el.review,
+                            isbn: el.isbn,
+                            coverPath: coverFetchPath
                         }]
                     });
                 }
@@ -59,13 +63,18 @@ app.get('/', async (req, res) => {
     } catch (error) {
         console.log(error)
     }
-    booksInDB = books
-    res.render('index.ejs', { books: books, editMode: editMode})
+    booksInDB = books.sort(function(a, b) {
+        return (a.id - b.id);
+    });
+    console.log(booksInDB)
+
+    res.render('index.ejs', { books: books, editMode: editMode, clickedCard: clickedCard})
 })
 
 app.post('/', async (req, res) => {
     const title = req.body.title;
     const author = req.body.author;
+    const isbn = req.body.isbn;
     const points = req.body.points;
     const review = req.body.review;
     let id;
@@ -84,7 +93,7 @@ app.post('/', async (req, res) => {
     try {
         db.query('insert into opinions (id,review,rating) values($1,$2,$3)', [id, review, points])
             .then(() => {
-                db.query('INSERT INTO books (id,title, author, opinion_id) VALUES ($1,$2,$3,$4)', [id, title, author, opinion_id])
+                db.query('INSERT INTO books (id,title, author, opinion_id,isbn) VALUES ($1,$2,$3,$4,$5)', [id, title, author, opinion_id,isbn])
             })
     } catch (error) {
         console.log(error)
@@ -103,8 +112,10 @@ app.post('/delete', async (req, res) => {
     res.redirect('/')
 })
 
-app.post('/editOn', (req,res)=>{
+app.post('/editOn', (req, res) => {
     editMode = true;
+    clickedCard = req.body.bookId;
+    console.log(clickedCard)
     res.redirect('/')
 })
 
@@ -112,7 +123,7 @@ app.post('/edit', async (req, res) => {
     const id = req.body.bookId;
     const title = req.body?.title;
     const author = req.body?.author;
-    const points = req.body?.points;
+    const points = req.body?.points||booksInDB.find(el=>el.id == id).points;
     const review = req.body?.review;
     editMode = false;
 
