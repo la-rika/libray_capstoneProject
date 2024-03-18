@@ -4,6 +4,7 @@
 <ul>
     <li>Ejs</li>
     <li>node.js + express.js</li>
+    <li>Bootstrap v5.2</li>
 </ul>
 <h4>Used APIS</h4>
 <ul>
