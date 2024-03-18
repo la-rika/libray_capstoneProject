@@ -1,11 +1,11 @@
 <h1>Library capstone project</h1>
 <p>A capstone project is a project where I can test new learned technologies</p>
-<h6>Used technologies and frameworks</h6>
+<h4>Used technologies and frameworks</h4>
 <ul>
     <li>Ejs</li>
     <li>node.js + express.js</li>
 </ul>
-<h6>Used APIS</h6>
+<h4>Used APIS</h4>
 <ul>
-    <li>covers images: <a href="https://openlibrary.org/dev/docs/api/covers"></a></li>
+    <li>covers images: https://openlibrary.org/dev/docs/api/covers</li>
 </ul>
